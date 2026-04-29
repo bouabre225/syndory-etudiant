@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:syndory_etudiant/components/app_navbar.dart';
 import 'package:syndory_etudiant/components/apptheme.dart';
-import 'package:syndory_etudiant/components/attendance/appBar.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart';
 
 
@@ -20,9 +20,7 @@ class EmptyAttendanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AssiduiteAppBar(
-        onInfo: () => _showInfoDialog(context),
-      ),
+      appBar: AppNavbar(title: 'Assiduité'),
       // SingleChildScrollView évite le RenderFlex overflow sur petits écrans
       body: SafeArea(
         child: SingleChildScrollView(
