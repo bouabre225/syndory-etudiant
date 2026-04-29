@@ -7,7 +7,7 @@ import 'package:syndory_etudiant/screens/dashboard/dashboard_page.dart';
 import 'package:syndory_etudiant/screens/calendar/calendar_page.dart';    
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
