@@ -11,7 +11,7 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.onBack,
     this.avatarUrl,
-  });
+  }); 
 
   @override
   Size get preferredSize => const Size.fromHeight(56);

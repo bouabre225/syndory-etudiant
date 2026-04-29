@@ -37,7 +37,7 @@ class DevoirCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── En-tête : matière + badge niveau ─────────────────
+          // ── En-tête : matière + badge niveau 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -70,7 +70,7 @@ class DevoirCard extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          // ── Titre du devoir ────────────────────────────────────
+          // ── Titre du devoir 
           Text(
             titre,
             style: const TextStyle(
@@ -82,7 +82,7 @@ class DevoirCard extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          // ── Date avec icône calendrier ─────────────────────────
+          //  Date avec icône calendrier 
           Row(
             children: [
               Icon(Icons.calendar_today_outlined,
@@ -97,7 +97,7 @@ class DevoirCard extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // ── Barre de progression + pourcentage ─────────────────
+          // ── Barre de progression + pourcentage 
           Row(
             children: [
               Expanded(

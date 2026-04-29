@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/devoirs_screen.dart';
+import 'screens/main_screen.dart'; // ← point d'entrée avec la navigation
 
 void main() {
   runApp(MyApp());
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DevoirsScreen(), // 
+      home: MainScreen(), // gère les 4 écrans + la BottomNavBar
     );
   }
 }
