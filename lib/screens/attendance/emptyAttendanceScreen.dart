@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syndory_etudiant/components/app_navbar.dart';
+import 'package:syndory_etudiant/components/appNavbarNoReturn.dart';
 import 'package:syndory_etudiant/components/apptheme.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart';
 
@@ -20,7 +20,7 @@ class EmptyAttendanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AppNavbar(title: 'Assiduité'),
+      appBar: AppNavBarNoReturn(title: 'Assiduité'),
       // SingleChildScrollView évite le RenderFlex overflow sur petits écrans
       body: SafeArea(
         child: SingleChildScrollView(
@@ -110,29 +110,6 @@ class EmptyAttendanceScreen extends StatelessWidget {
     );
   }
 
-  void _showInfoDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: AppColors.bgCard,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('À propos',
-            style: TextStyle(color: AppColors.textPrimary)),
-        content: const Text(
-          'Ce module affiche votre taux de présence par matière, enregistré par vos enseignants.',
-          style: TextStyle(color: AppColors.textSecondary),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('OK',
-                style: TextStyle(color: AppColors.orange)),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 /// Illustration fidèle au design : carte claire + icône orange flottante.

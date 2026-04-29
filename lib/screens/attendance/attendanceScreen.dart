@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart';
-import 'package:syndory_etudiant/components/app_navbar.dart';
+import 'package:syndory_etudiant/components/appNavbarNoReturn.dart';
 import 'package:syndory_etudiant/components/apptheme.dart';
 import 'package:syndory_etudiant/components/attendance/courseAttendanceCard.dart';
 import 'package:syndory_etudiant/components/attendance/historyItem.dart';
 import 'package:syndory_etudiant/components/attendance/progressring.dart';
 import 'package:syndory_etudiant/components/attendance/tabBar.dart';
-import 'package:syndory_etudiant/mocks/mock.dart';
+import 'package:syndory_etudiant/mocks/attendanceMock.dart';
 import 'package:syndory_etudiant/models/periodModel.dart';
 
 
@@ -33,7 +33,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AppNavbar(title: 'Assiduité'),
+      appBar: AppNavBarNoReturn(title: 'Assiduité'),
       body: SafeArea(
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 350),
@@ -64,27 +64,6 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
     );
   }
 
-  void _showInfoDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: AppColors.bgCard,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Assiduité',
-            style: TextStyle(color: AppColors.textPrimary)),
-        content: const Text(
-          'Votre taux de présence est calculé à partir des pointages enregistrés par vos enseignants.',
-          style: TextStyle(color: AppColors.textSecondary),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('OK', style: TextStyle(color: AppColors.orange)),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 class _AttendanceBody extends StatelessWidget {

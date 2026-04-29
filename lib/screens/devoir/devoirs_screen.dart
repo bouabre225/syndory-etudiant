@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../components/app_navbar.dart';
+import '../../components/appNavbar.dart';
 import '../../components/devoirs/devoirs_body.dart';
-import '../../mocks/mocks_devoirs.dart'; // ← données factices (remplacées plus tard par l'API)
+import '../../mocks/mocksDevoirs.dart'; // ← données factices (remplacées plus tard par l'API)
 
 /// Écran "Mes Devoirs".
 /// Assemble AppNavbar + DevoirsBody avec filtrage par onglet.
