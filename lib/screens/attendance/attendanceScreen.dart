@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart';
+import 'package:syndory_etudiant/components/app_navbar.dart';
 import 'package:syndory_etudiant/components/apptheme.dart';
 import 'package:syndory_etudiant/components/attendance/courseAttendanceCard.dart';
-import 'package:syndory_etudiant/components/attendance/appBar.dart';
 import 'package:syndory_etudiant/components/attendance/historyItem.dart';
 import 'package:syndory_etudiant/components/attendance/progressring.dart';
 import 'package:syndory_etudiant/components/attendance/tabBar.dart';
-import 'package:syndory_etudiant/mock/mock.dart';
+import 'package:syndory_etudiant/mocks/mock.dart';
 import 'package:syndory_etudiant/models/periodModel.dart';
 
 
@@ -33,9 +33,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AssiduiteAppBar(
-        onInfo: () => _showInfoDialog(context),
-      ),
+      appBar: AppNavbar(title: 'Assiduité'),
       body: SafeArea(
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 350),
