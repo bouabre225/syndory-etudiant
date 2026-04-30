@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/components/AppBottomNavbar.dart';
 import 'package:syndory_etudiant/components/apptheme.dart';
+import 'package:syndory_etudiant/screens/attendance/attendanceScreen.dart';
+import 'package:syndory_etudiant/screens/attendance/emptyAttendanceScreen.dart';
 import 'package:syndory_etudiant/screens/dashboard/dashboard_page.dart';   
-import 'package:syndory_etudiant/screens/calendar/calendar_page.dart';    
-import 'package:syndory_etudiant/screens/matieres/matieres_screen.dart';
+import 'package:syndory_etudiant/screens/calendar/calendar_page.dart';
 import 'package:syndory_etudiant/screens/devoir/devoirs_screen.dart';
+import 'package:syndory_etudiant/screens/justificatif/justificatifs_tab.dart';
+import 'package:syndory_etudiant/screens/matieres/matieres_screen.dart';    
 
 void main() {
   runApp(MyApp());
@@ -40,20 +43,22 @@ class _AppShellState extends State<AppShell> {
   Widget build(BuildContext context) {
   return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      // ✅ Le Scaffold du shell fournit les contraintes finies à IndexedStack
       body: IndexedStack(
         index: _currentIndex,
         children: [
           DashboardPage(navIndex: _currentIndex, onNavTap: _onNavTap),
           CalendarPage(navIndex: _currentIndex, onNavTap: _onNavTap),
-          MatieresScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
-          DevoirsScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
+          JustificatifsTab(navIndex: _currentIndex, onNavTap: _onNavTap),
+          _AttendanceTab(navIndex: _currentIndex, onNavTap: _onNavTap),
+           MatieresScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
+           DevoirsScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
           _PlaceholderPage(
             label: 'Profil',
-            icon: Icons.person_rounded,
+            icon: Icons.person,
             navIndex: _currentIndex,
             onNavTap: _onNavTap,
           ),
+           
         ],
       ),
     );
@@ -61,6 +66,36 @@ class _AppShellState extends State<AppShell> {
 }
 
 
+/// Onglet Assiduité : bascule entre écran vide et écran rempli.
+class _AttendanceTab extends StatefulWidget {
+  final int navIndex;
+  final ValueChanged<int> onNavTap;
+
+  const _AttendanceTab({required this.navIndex, required this.onNavTap});
+
+  @override
+  State<_AttendanceTab> createState() => _AttendanceTabState();
+}
+
+class _AttendanceTabState extends State<_AttendanceTab> {
+  bool _hasData = false;
+
+  @override
+  Widget build(BuildContext context) {
+    if (_hasData) {
+      return AttendanceScreen(
+        navIndex: widget.navIndex,
+        onNavTap: widget.onNavTap,
+      );
+    }
+
+    return EmptyAttendanceScreen(
+      navIndex: widget.navIndex,
+      onNavTap: widget.onNavTap,
+      onRefresh: () => setState(() => _hasData = true),
+    );
+  }
+}
 
 /// Placeholder pour les onglets non encore implémentés.
 class _PlaceholderPage extends StatelessWidget {

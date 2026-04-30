@@ -13,12 +13,14 @@ class AppBottomNavBar extends StatelessWidget {
   });
 
   static const _icons = [
-    Icons.grid_view_rounded,
-    Icons.calendar_month_outlined,
-    Icons.school_outlined,
-    Icons.assignment_outlined,
-    Icons.person_outline,
-  ];
+  Icons.home_rounded,            // Accueil
+  Icons.calendar_month_rounded,  // Calendrier
+  Icons.person_off_rounded,      // Absences (Icone explicite pour l'absence)
+  Icons.fact_check_rounded,      // Assiduité (Checklist de présence)
+  Icons.menu_book_rounded,       // Mes Matières / Cours
+  Icons.campaign_rounded,        // Annonces / Flash info
+  Icons.person_rounded,          // Profil
+];
 
   @override
   Widget build(BuildContext context) {
