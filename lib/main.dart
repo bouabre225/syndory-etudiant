@@ -61,36 +61,6 @@ class _AppShellState extends State<AppShell> {
 }
 
 
-/// Onglet Assiduité : bascule entre écran vide et écran rempli.
-class _AttendanceTab extends StatefulWidget {
-  final int navIndex;
-  final ValueChanged<int> onNavTap;
-
-  const _AttendanceTab({required this.navIndex, required this.onNavTap});
-
-  @override
-  State<_AttendanceTab> createState() => _AttendanceTabState();
-}
-
-class _AttendanceTabState extends State<_AttendanceTab> {
-  bool _hasData = false;
-
-  @override
-  Widget build(BuildContext context) {
-    if (_hasData) {
-      return AttendanceScreen(
-        navIndex: widget.navIndex,
-        onNavTap: widget.onNavTap,
-      );
-    }
-
-    return EmptyAttendanceScreen(
-      navIndex: widget.navIndex,
-      onNavTap: widget.onNavTap,
-      onRefresh: () => setState(() => _hasData = true),
-    );
-  }
-}
 
 /// Placeholder pour les onglets non encore implémentés.
 class _PlaceholderPage extends StatelessWidget {

@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:syndory_etudiant/components/apptheme.dart';
 
 /// Carte représentant une matière.
-/// Réutilisable partout dans l'app.
-///
-/// [nom]           : intitulé de la matière
-/// [badge]         : libellé court (ex: 'INFOS', 'MATHS')
-/// [couleurBadge]  : couleur du badge
-/// [assiduite]     : taux d'assiduité entre 0.0 et 1.0
-/// [prof]          : nom du professeur
-/// [coefficient]   : coefficient de la matière
-/// [progression]   : avancement du cours entre 0.0 et 1.0
-/// [avatarIcon]    : icône de l'avatar du professeur
 class MatiereCard extends StatelessWidget {
   final String nom;
   final String badge;
@@ -34,9 +25,9 @@ class MatiereCard extends StatelessWidget {
 
   /// Couleur de l'assiduité selon le taux
   Color get _couleurAssiduite {
-    if (assiduite >= 0.80) return const Color(0xFF2ECC71);  // vert
-    if (assiduite >= 0.50) return const Color(0xFFF39C12);  // orange
-    return const Color(0xFFE74C3C);                          // rouge
+    if (assiduite >= 0.80) return AppColors.success;
+    if (assiduite >= 0.50) return AppColors.warning;
+    return AppColors.danger;
   }
 
   @override
@@ -45,15 +36,9 @@ class MatiereCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.bgCard,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow: AppColors.cardShadow,
         border: Border(
           left: BorderSide(color: couleurBadge, width: 4),
         ),
@@ -61,11 +46,9 @@ class MatiereCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── En-tête : badge + assiduité ───────────────────────────────────
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Badge de catégorie (ex: INFOS, MATHS)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
@@ -82,19 +65,12 @@ class MatiereCard extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // Taux d'assiduité
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   const Text(
                     'ASSIDUITÉ',
-                    style: TextStyle(
-                      fontSize: 9,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
-                    ),
+                    style: AppTextStyles.sectionLabel,
                   ),
                   Text(
                     '${(assiduite * 100).toInt()}%',
@@ -109,23 +85,12 @@ class MatiereCard extends StatelessWidget {
               ),
             ],
           ),
-
           const SizedBox(height: 10),
-
-          // ── Nom de la matière ────────────────────────────────────────────
           Text(
             nom,
-            style: const TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.w800,
-              color: Colors.black87,
-              height: 1.2,
-            ),
+            style: AppTextStyles.heading.copyWith(fontSize: 17),
           ),
-
           const SizedBox(height: 10),
-
-          // ── Prof + coefficient ───────────────────────────────────────────
           Row(
             children: [
               CircleAvatar(
@@ -139,17 +104,13 @@ class MatiereCard extends StatelessWidget {
                 children: [
                   Text(
                     prof,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: AppTextStyles.body.copyWith(fontSize: 12),
                   ),
                   Text(
                     'Coefficient: $coefficient',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 11,
-                      color: Colors.orange.shade700,
+                      color: AppColors.secondary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -157,40 +118,32 @@ class MatiereCard extends StatelessWidget {
               ),
             ],
           ),
-
           const SizedBox(height: 12),
-
-          // ── Barre de progression du cours ────────────────────────────────
           Row(
             children: [
-              const Text(
+              Text(
                 'Progression du cours',
-                style: TextStyle(
-                  fontSize: 11,
-                  color: Colors.black54,
-                ),
+                style: AppTextStyles.body.copyWith(fontSize: 11, color: AppColors.gray2),
               ),
               const Spacer(),
               Text(
                 '${(progression * 100).toInt()}%',
-                style: const TextStyle(
+                style: AppTextStyles.body.copyWith(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black54,
+                  color: AppColors.gray2,
                 ),
               ),
             ],
           ),
-
           const SizedBox(height: 6),
-
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
               value: progression,
               minHeight: 6,
-              backgroundColor: Colors.grey.shade200,
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+              backgroundColor: AppColors.gray4.withOpacity(0.3),
+              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.secondary),
             ),
           ),
         ],

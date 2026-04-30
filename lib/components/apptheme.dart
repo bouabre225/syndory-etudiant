@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // ── Brand ─────────────────────────────────────────────────────────────────
+  // ── Brand 
   static const Color primary = Color(0xFF092C4C);   // navy
   static const Color secondary = Color(0xFFF2994A); // orange
 
