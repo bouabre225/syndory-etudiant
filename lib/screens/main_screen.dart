@@ -4,7 +4,7 @@ import '../components/devoirs/bottom_nav_bar.dart';
 // Les 4 écrans correspondant aux 4 icônes de la barre de navigation
 import 'accueil_screen.dart';
 import 'devoirs_screen.dart';
-import 'emploi_screen.dart';
+import 'matieres_screen.dart'; // ← remplace la page vide EmploiScreen
 import 'profil_screen.dart';
 
 ///  Point d'entrée de la navigation principale.
@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const AccueilScreen(),
     DevoirsScreen(),         // l'écran qu'on avait déjà
-    const EmploiScreen(),
+    MatieresScreen(),        // ← Mes Matières (remplace la page vide Emploi)
     const ProfilScreen(),
   ];
 
