@@ -17,8 +17,8 @@ class AppBottomNavBar extends StatelessWidget {
   Icons.calendar_month_rounded,  // Calendrier
   Icons.person_off_rounded,      // Absences (Icone explicite pour l'absence)
   Icons.fact_check_rounded,      // Assiduité (Checklist de présence)
-  Icons.campaign_rounded,        // Annonces / Flash info
   Icons.menu_book_rounded,       // Mes Matières / Cours
+  Icons.campaign_rounded,        // Annonces / Flash info
   Icons.person_rounded,          // Profil
 ];
 

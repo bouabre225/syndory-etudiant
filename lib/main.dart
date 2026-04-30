@@ -4,7 +4,10 @@ import 'package:syndory_etudiant/components/apptheme.dart';
 import 'package:syndory_etudiant/screens/attendance/attendanceScreen.dart';
 import 'package:syndory_etudiant/screens/attendance/emptyAttendanceScreen.dart';
 import 'package:syndory_etudiant/screens/dashboard/dashboard_page.dart';   
-import 'package:syndory_etudiant/screens/calendar/calendar_page.dart';    
+import 'package:syndory_etudiant/screens/calendar/calendar_page.dart';
+import 'package:syndory_etudiant/screens/devoir/devoirs_screen.dart';
+import 'package:syndory_etudiant/screens/justificatif/justificatifs_tab.dart';
+import 'package:syndory_etudiant/screens/matieres/matieres_screen.dart';    
 
 void main() {
   runApp(MyApp());
@@ -45,26 +48,10 @@ class _AppShellState extends State<AppShell> {
         children: [
           DashboardPage(navIndex: _currentIndex, onNavTap: _onNavTap),
           CalendarPage(navIndex: _currentIndex, onNavTap: _onNavTap),
-           _PlaceholderPage(
-            label: 'Absences',
-            icon: Icons.person_off,
-            navIndex: _currentIndex,
-            onNavTap: _onNavTap,
-          ),
+          JustificatifsTab(navIndex: _currentIndex, onNavTap: _onNavTap),
           _AttendanceTab(navIndex: _currentIndex, onNavTap: _onNavTap),
-          
-          _PlaceholderPage(
-            label: 'Annonce',
-            icon: Icons.campaign_rounded,
-            navIndex: _currentIndex,
-            onNavTap: _onNavTap,
-          ),
-          _PlaceholderPage(
-            label: 'Mes cours',
-            icon: Icons.menu_book,
-            navIndex: _currentIndex,
-            onNavTap: _onNavTap,
-          ),
+           MatieresScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
+           DevoirsScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
           _PlaceholderPage(
             label: 'Profil',
             icon: Icons.person,
