@@ -40,7 +40,6 @@ class _AppShellState extends State<AppShell> {
   Widget build(BuildContext context) {
   return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      // ✅ Le Scaffold du shell fournit les contraintes finies à IndexedStack
       body: IndexedStack(
         index: _currentIndex,
         children: [
@@ -53,6 +52,7 @@ class _AppShellState extends State<AppShell> {
             onNavTap: _onNavTap,
           ),
           _AttendanceTab(navIndex: _currentIndex, onNavTap: _onNavTap),
+          
           _PlaceholderPage(
             label: 'Annonce',
             icon: Icons.campaign_rounded,
