@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'controllers/profile_controller.dart';
-import 'widgets/profile_header.dart';
-import 'widgets/editable_field.dart';
-import 'widgets/info_section.dart';
-import 'widgets/password_section.dart';
+import '../../profile/controllers/profile_controller.dart';
+import '../../components/profil/profile_header.dart';
+import '../../components/profil/editable_field.dart';
+import '../../components/profil/info_section.dart';
+import '../../components/profil/password_section.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -39,57 +39,6 @@ class ProfilePage extends StatelessWidget {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Container(color: const Color(0xFFF0F0F0), height: 1),
-        ),
-      ),
-
-      // ─── Bottom Navigation Bar ─────────────────────────────────────
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.06),
-              blurRadius: 12,
-              offset: const Offset(0, -2),
-            ),
-          ],
-        ),
-        child: BottomNavigationBar(
-          currentIndex: 4,
-          selectedItemColor: const Color(0xFFFF6B35),
-          unselectedItemColor: Colors.grey.shade400,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
-              label: "",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today_outlined),
-              activeIcon: Icon(Icons.calendar_today),
-              label: "",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.menu_book_outlined),
-              activeIcon: Icon(Icons.menu_book),
-              label: "",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.language_outlined),
-              activeIcon: Icon(Icons.language),
-              label: "",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              activeIcon: Icon(Icons.person),
-              label: "",
-            ),
-          ],
         ),
       ),
 

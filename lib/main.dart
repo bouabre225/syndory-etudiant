@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'profile/profile_page.dart';
+import 'screens/profil/profile_page.dart';
 import 'profile/controllers/profile_controller.dart';
 
 void main() {

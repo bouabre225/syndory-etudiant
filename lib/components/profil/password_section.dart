@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controllers/profile_controller.dart';
+import '../../profile/controllers/profile_controller.dart';
 
 class PasswordSection extends StatelessWidget {
   const PasswordSection({super.key});
