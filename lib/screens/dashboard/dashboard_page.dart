@@ -32,48 +32,51 @@ class _DashboardPageState extends State<DashboardPage> {
     final user = MockData.currentUser;
     final hasCourses = MockData.hasCoursesToday;
 
-    return Column(
-      children: [
-        Expanded(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              HeaderSection(user: user),
-              
-              if (hasCourses) ...[
-                if (activeSession != null) const ActiveSessionBanner(),
-                if (nextCourse != null) ...[
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Text(
-                      'À suivre',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF052A36),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFB),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                HeaderSection(user: user),
+                
+                if (hasCourses) ...[
+                  if (activeSession != null) const ActiveSessionBanner(),
+                  if (nextCourse != null) ...[
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: Text(
+                        'À suivre',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF052A36),
+                        ),
                       ),
                     ),
-                  ),
-                  NextCourseCard(courseData: nextCourse),
+                    NextCourseCard(courseData: nextCourse),
+                  ],
+                  const TimetableSection(),
+                ] else ...[
+                  const EmptyStateCard(),
                 ],
-                const TimetableSection(),
-              ] else ...[
-                const EmptyStateCard(),
-              ],
 
-              const StatsGridSection(),
-              const AnnouncementsSection(),
-              const RecentDocumentsSection(),
-              const SizedBox(height: 30),
-            ],
+                const StatsGridSection(),
+                const AnnouncementsSection(),
+                const RecentDocumentsSection(),
+                const SizedBox(height: 30),
+              ],
+            ),
           ),
-        ),
-        // ✅ NavBar en bas de la colonne
-        AppBottomNavBar(
-          currentIndex: widget.navIndex,
-          onTap: widget.onNavTap,
-        ),
-      ],
+          // ✅ NavBar en bas de la colonne
+          AppBottomNavBar(
+            currentIndex: widget.navIndex,
+            onTap: widget.onNavTap,
+          ),
+        ],
+      ),
     );
   }
-}
+}
