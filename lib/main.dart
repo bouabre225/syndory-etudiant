@@ -51,7 +51,12 @@ class _AppShellState extends State<AppShell> {
           JustificatifsTab(navIndex: _currentIndex, onNavTap: _onNavTap),
           _AttendanceTab(navIndex: _currentIndex, onNavTap: _onNavTap),
            MatieresScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
-           DevoirsScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
+           _PlaceholderPage(
+            label: 'Annonce',
+            icon: Icons.campaign_rounded,
+            navIndex: _currentIndex,
+            onNavTap: _onNavTap,
+          ),
           _PlaceholderPage(
             label: 'Profil',
             icon: Icons.person,
