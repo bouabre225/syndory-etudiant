@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:syndory_etudiant/components/appTheme.dart';
+import 'package:syndory_etudiant/components/apptheme.dart';
 
 /// Anneau de progression circulaire affichant le taux global.
 class GlobalProgressRing extends StatefulWidget {
