@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'screens/profil/profile_page.dart';
-import 'profile/controllers/profile_controller.dart';
 import 'package:syndory_etudiant/components/AppBottomNavbar.dart';
 import 'package:syndory_etudiant/components/apptheme.dart';
 import 'package:syndory_etudiant/screens/attendance/attendanceScreen.dart';
@@ -16,13 +12,6 @@ import 'package:syndory_etudiant/screens/resources/resources_page.dart';
 
 void main() {
   runApp(MyApp());
-  MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ProfileController()),
-      ],
-      child: const MyApp(),
-    ),
-  );
 }
 
 class MyApp extends StatelessWidget {
@@ -65,7 +54,12 @@ class _AppShellState extends State<AppShell> {
            MatieresScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
            DevoirsScreen(navIndex: _currentIndex, onNavTap: _onNavTap),
            ResourcesPage(navIndex: _currentIndex, onNavTap: _onNavTap),
-           ProfilePage(navIndex: _currentIndex, onNavTap: _onNavTap),
+          _PlaceholderPage(
+            label: 'Profil',
+            icon: Icons.person,
+            navIndex: _currentIndex,
+            onNavTap: _onNavTap,
+          ),
            
         ],
       ),
