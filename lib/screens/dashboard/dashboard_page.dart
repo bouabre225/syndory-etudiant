@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:syndory_etudiant/components/dashboard/header.dart';
-import 'package:syndory_etudiant/components/dashboard/main_navigation_bar.dart';
+import 'package:syndory_etudiant/components/appBottomNavbar.dart'; 
+import 'package:syndory_etudiant/mocks/dashboardMockData.dart';
+import 'package:syndory_etudiant/components/dashboard/active_session_banner.dart';
 import 'package:syndory_etudiant/components/dashboard/next_course_card.dart';
 import 'package:syndory_etudiant/components/dashboard/recent_documents_section.dart';
 import 'package:syndory_etudiant/components/dashboard/timetable_section.dart';
@@ -9,35 +10,37 @@ import 'package:syndory_etudiant/components/dashboard/empty_state_day_off.dart';
 import 'package:syndory_etudiant/components/dashboard/stats_grid_section.dart';
 import 'package:syndory_etudiant/components/dashboard/announcements_section.dart';
 import 'package:syndory_etudiant/components/dashboard/recent_documents_section.dart';
-import 'package:syndory_etudiant/components/dashboard/next_course_card.dart';
-import '../notification/notifications_screen.dart'; 
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
+class DashboardPage extends StatefulWidget { 
+  final int navIndex;
+  final ValueChanged<int>? onNavTap;
+
+  const DashboardPage({
+    super.key,
+    this.navIndex = 0, 
+    this.onNavTap,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    // simulation : change à 'true' pour voir la bannière de cours clignotante
-    bool hasClassToday = false; 
+  State<DashboardPage> createState() => _DashboardPageState();
+}
 
-    return Scaffold(
-      backgroundColor: const Color(0xFFFBFBFB),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // 1. HEADER AVEC NAVIGATION VERS NOTIFICATIONS
-              _buildHeader(context),
+class _DashboardPageState extends State<DashboardPage> {
+  @override
+Widget build(BuildContext context) {
+  final activeSession = MockData.activeSession;
+  final nextCourse = MockData.nextCourse;
+  final user = MockData.currentUser;
 
-              // 2. ZONE DYNAMIQUE (COURS VS REPOS)
-              if (hasClassToday) ...[
-                const ActiveSessionBanner(), // Ton composant pixel-perfect clignotant
-                const NextCourseCard(), 
-              ] else 
-                const EmptyStateDayOff(), // Le composant avec le cornet de fête
-
-              // 3. SECTIONS PERMANENTES
+  return Column(
+    children: [
+      Expanded(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            _buildHeader(user),
+            if (activeSession != null) const ActiveSessionBanner(),
+            if (nextCourse != null) ...[
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
@@ -54,9 +57,9 @@ class DashboardPage extends StatelessWidget {
                 child: Text(
                   "Annonces",
                   style: TextStyle(
-                    fontSize: 18, 
-                    fontWeight: FontWeight.bold, 
-                    color: Color(0xFF052A36)
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF052A36),
                   ),
                 ),
               ),
@@ -77,15 +80,23 @@ class DashboardPage extends StatelessWidget {
               
               const SizedBox(height: 30),
             ],
-          ),
+            const TimetableSection(),
+            const StatsGridSection(),
+            const AnnouncementsSection(),
+            const RecentDocumentsSection(),
+            const SizedBox(height: 30),
+          ],
         ),
       ),
-      bottomNavigationBar: const MainNavigationBar(),
-    );
-  }
+      AppBottomNavBar(
+        currentIndex: widget.navIndex,
+        onTap: widget.onNavTap,
+      ),
+    ],
+  );
+}
 
-  // HEADER AVEC ACTION DE NOTIFICATION
-  Widget _buildHeader(BuildContext context) {
+  Widget _buildHeader(Map<String, dynamic> user) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Row(
@@ -93,10 +104,10 @@ class DashboardPage extends StatelessWidget {
         children: [
           Row(
             children: [
-              const CircleAvatar(
-                radius: 25,
-                backgroundColor: Color(0xFFE9F0FF),
-                child: Icon(Icons.person, color: Color(0xFF052A36)),
+              Text(
+                "Bonjour, ${user['nom']}",
+                style: const TextStyle(
+                    fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(width: 12),
               Column(
@@ -118,18 +129,19 @@ class DashboardPage extends StatelessWidget {
               ),
             ],
           ),
-          // BOUTON NOTIFICATION
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
-              );
-            },
-            icon: const Icon(
-              Icons.notifications_none_rounded, 
-              size: 28, 
-              color: Color(0xFF667A81)
+          const Spacer(),
+          if (user['role'] == 'responsable')
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: const Color(0xFF052A36),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: const Text(
+                "Responsable",
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              ),
             ),
           ),
         ],
