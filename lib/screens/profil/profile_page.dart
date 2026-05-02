@@ -8,7 +8,7 @@ import '../../components/profil/info_section.dart';
 import '../../components/profil/password_section.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({super.key, required int navIndex, required void Function(int index) onNavTap});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class EmptyStateNotifications extends StatelessWidget {
   const EmptyStateNotifications({super.key});

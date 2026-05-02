@@ -16,7 +16,7 @@ class MatieresBody extends StatelessWidget {
   final String searchQuery;
   final ValueChanged<String>? onSearchChanged;
 
-  const MatieresBody({
+  const MatieresBody({super.key, 
     this.activeSemestre = 1,
     this.onSemestreChanged,
     required this.matieres,

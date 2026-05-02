@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart'; 
 import 'package:syndory_etudiant/mocks/dashboardMockData.dart';
 import 'package:syndory_etudiant/components/dashboard/active_session_banner.dart';
-import 'package:syndory_etudiant/components/dashboard/next_course_card.dart';
 import 'package:syndory_etudiant/components/dashboard/recent_documents_section.dart';
 import 'package:syndory_etudiant/components/dashboard/timetable_section.dart';
-import 'package:syndory_etudiant/components/dashboard/active_session_banner.dart';
-import 'package:syndory_etudiant/components/dashboard/empty_state_day_off.dart';
 import 'package:syndory_etudiant/components/dashboard/stats_grid_section.dart';
 import 'package:syndory_etudiant/components/dashboard/announcements_section.dart';
-import 'package:syndory_etudiant/components/dashboard/recent_documents_section.dart';
+import 'package:syndory_etudiant/screens/notification/notifications_screen.dart'; // Import pour le lien
 
 class DashboardPage extends StatefulWidget { 
   final int navIndex;
@@ -27,74 +24,74 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   @override
-Widget build(BuildContext context) {
-  final activeSession = MockData.activeSession;
-  final nextCourse = MockData.nextCourse;
-  final user = MockData.currentUser;
+  Widget build(BuildContext context) {
+    final activeSession = MockData.activeSession;
+    final nextCourse = MockData.nextCourse;
+    final user = MockData.currentUser;
 
-  return Column(
-    children: [
-      Expanded(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            _buildHeader(user),
-            if (activeSession != null) const ActiveSessionBanner(),
-            if (nextCourse != null) ...[
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                  children: [
-                    Expanded(child: _PlaceholderStats(title: "PRÉSENCE", value: "85%")),
-                    SizedBox(width: 15),
-                    Expanded(child: _PlaceholderStats(title: "DEVOIRS", value: "3")),
-                  ],
-                ),
-              ),
-
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                child: Text(
-                  "Annonces",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF052A36),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              _buildHeader(user),
+              if (activeSession != null) const ActiveSessionBanner(),
+              if (nextCourse != null) ...[
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(child: _PlaceholderStats(title: "PRÉSENCE", value: "85%")),
+                      SizedBox(width: 15),
+                      Expanded(child: _PlaceholderStats(title: "DEVOIRS", value: "3")),
+                    ],
                   ),
                 ),
-              ),
+
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  child: Text(
+                    "Annonces",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF052A36),
+                    ),
+                  ),
+                ),
+                const AnnouncementsSection(),
+
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  child: Text(
+                    "Documents récents",
+                    style: TextStyle(
+                      fontSize: 18, 
+                      fontWeight: FontWeight.bold, 
+                      color: Color(0xFF052A36)
+                    ),
+                  ),
+                ),
+                const RecentDocumentsSection(),
+                
+                const SizedBox(height: 30),
+              ],
+              const TimetableSection(),
+              const StatsGridSection(),
               const AnnouncementsSection(),
-
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                child: Text(
-                  "Documents récents",
-                  style: TextStyle(
-                    fontSize: 18, 
-                    fontWeight: FontWeight.bold, 
-                    color: Color(0xFF052A36)
-                  ),
-                ),
-              ),
               const RecentDocumentsSection(),
-              
               const SizedBox(height: 30),
             ],
-            const TimetableSection(),
-            const StatsGridSection(),
-            const AnnouncementsSection(),
-            const RecentDocumentsSection(),
-            const SizedBox(height: 30),
-          ],
+          ),
         ),
-      ),
-      AppBottomNavBar(
-        currentIndex: widget.navIndex,
-        onTap: widget.onNavTap,
-      ),
-    ],
-  );
-}
+        AppBottomNavBar(
+          currentIndex: widget.navIndex,
+          onTap: widget.onNavTap,
+        ),
+      ],
+    );
+  }
 
   Widget _buildHeader(Map<String, dynamic> user) {
     return Padding(
@@ -116,7 +113,7 @@ Widget build(BuildContext context) {
                   const Text(
                     "Syndory",
                     style: TextStyle(
-                      color: Color(0xFFF06424), // Orange Syndory
+                      color: Color(0xFFF06424), 
                       fontWeight: FontWeight.bold, 
                       fontSize: 18
                     ),
@@ -130,6 +127,22 @@ Widget build(BuildContext context) {
             ],
           ),
           const Spacer(),
+          
+          // BOUTON NOTIFICATION AJOUTÉ ICI
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+              );
+            },
+            icon: const Icon(
+              Icons.notifications_none_rounded, 
+              color: Color(0xFF667A81), 
+              size: 28
+            ),
+          ),
+
           if (user['role'] == 'responsable')
             Container(
               padding:
@@ -143,14 +156,12 @@ Widget build(BuildContext context) {
                 style: TextStyle(color: Colors.white, fontSize: 10),
               ),
             ),
-          ),
         ],
       ),
     );
   }
 }
 
-// Simple Placeholder pour compiler sans erreurs si tes sections ne sont pas prêtes
 class _PlaceholderStats extends StatelessWidget {
   final String title;
   final String value;

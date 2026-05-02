@@ -7,7 +7,7 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBack;
   final String? avatarUrl;
 
-  const AppNavbar({
+  const AppNavbar({super.key, 
     required this.title,
     this.onBack,
     this.avatarUrl,
