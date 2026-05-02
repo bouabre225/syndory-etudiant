@@ -107,7 +107,7 @@ class _JustificatifsUploadScreenState
 
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AppNavBarNoReturn(title: "Justificatifs d'absence"),
+      appBar: AppNavBarNoReturn(title: "Justificatifs d'absence", onNotificationPressed: () {  },),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),

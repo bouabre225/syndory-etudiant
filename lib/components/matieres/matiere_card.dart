@@ -12,7 +12,7 @@ class MatiereCard extends StatelessWidget {
   final double progression; // entre 0.0 et 1.0
   final IconData avatarIcon;
 
-  const MatiereCard({
+  const MatiereCard({super.key, 
     required this.nom,
     required this.badge,
     required this.couleurBadge,
