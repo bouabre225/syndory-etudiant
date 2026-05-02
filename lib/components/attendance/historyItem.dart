@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/components/apptheme.dart';
-
 import 'package:syndory_etudiant/models/periodModel.dart';
+import 'package:syndory_etudiant/models/session_status.dart';
+import 'package:syndory_etudiant/screens/attendance/detail_seance_screen.dart';
 
 
 /// Ligne d'historique pour une séance passée.
@@ -39,13 +40,13 @@ class RecentHistoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(
-        color: AppColors.bgCard,
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Row(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          color: AppColors.bgCard,
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Row(
         children: [
           // Course icon avatar
           Container(

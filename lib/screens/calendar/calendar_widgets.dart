@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syndory_etudiant/screens/matieres/matiere_detail_screen.dart';
+import 'package:syndory_etudiant/screens/attendance/detail_seance_screen.dart';
+import 'package:syndory_etudiant/screens/seances_en_cours/en_cours_screen.dart';
+import 'package:syndory_etudiant/models/session_status.dart';
 import 'calendar_data.dart';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -347,14 +350,36 @@ class CourseCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
+        // --- DÉMONSTRATION DES 4 VARIANTS ---
+        
+        if (course.id == '1') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EnCoursScreen(
+              courseName: course.title,
+              professorName: course.professor,
+            )),
+          );
+          return;
+        }
+
+        // 2. Sinon, on affiche l'écran des séances terminées (Dev 2) avec différents statuts :
+        SessionStatus status;
+        if (course.type == CourseType.absent) {
+            status = SessionStatus.absence; // Affiche le bouton "Justifier"
+        } else if (course.type == CourseType.exam) {
+            status = SessionStatus.justified; // Affiche "Validé par l'admin"
+        } else {
+            status = SessionStatus.presence; // Affiche "Présence enregistrée"
+        }
+
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MatiereDetailScreen(
-              nom: course.title,
-              prof: course.professor,
-              assiduite: 0.85,
-              progression: 0.92,
+            builder: (context) => DetailSeanceScreen(
+              status: status,
+              courseName: course.title,
+              professorName: course.professor,
             ),
           ),
         );
