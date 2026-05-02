@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../screens/seances_en_cours/en_cours_screen.dart';
 
 class ActiveSessionBanner extends StatefulWidget {
   const ActiveSessionBanner({super.key});
@@ -115,7 +116,12 @@ class _ActiveSessionBannerState extends State<ActiveSessionBanner>
           SizedBox(
             height: 40,
             child: ElevatedButton(
-              onPressed: () => debugPrint("Navigation vers ETU-06"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EnCoursScreen()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: brandGreen,
                 foregroundColor: Colors.white,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart';
+import 'package:syndory_etudiant/screens/ressources/ressources_screen.dart';
 
 class MatiereDetailScreen extends StatelessWidget {
   final Map<String, dynamic> matiere;
@@ -193,6 +194,34 @@ class MatiereDetailScreen extends StatelessWidget {
               present: true,
             ),
             const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RessourcesScreen(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFF06424),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 0,
+                ),
+                icon: const Icon(Icons.folder_open),
+                label: const Text(
+                  'Voir les ressources pédagogiques',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
           ],
         ),
       ),
