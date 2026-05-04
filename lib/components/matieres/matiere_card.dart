@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:syndory_etudiant/components/appTheme.dart';
+=======
+import 'package:syndory_etudiant/components/apptheme.dart';
+import 'package:syndory_etudiant/screens/matieres/matiere_detail_screen.dart';
+>>>>>>> origin/develop
 
 /// Carte représentant une matière.
 class MatiereCard extends StatelessWidget {
@@ -12,7 +17,7 @@ class MatiereCard extends StatelessWidget {
   final double progression; // entre 0.0 et 1.0
   final IconData avatarIcon;
 
-  const MatiereCard({
+  const MatiereCard({super.key, 
     required this.nom,
     required this.badge,
     required this.couleurBadge,
@@ -32,8 +37,28 @@ class MatiereCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MatiereDetailScreen(
+              matiere: {
+                'nom': nom,
+                'avatarIcon': avatarIcon,
+                'badge': badge,
+                'couleurBadge': couleurBadge,
+                'progression': progression,
+                'assiduite': assiduite,
+                'prof': prof,
+                'coefficient': coefficient,
+              },
+            ),
+          ),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.bgCard,
@@ -148,6 +173,7 @@ class MatiereCard extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }

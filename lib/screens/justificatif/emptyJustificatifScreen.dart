@@ -10,18 +10,22 @@ class EmptyJustificatifsScreen extends StatelessWidget {
   final ValueChanged<int>? onNavTap;
   final List<JustificatifHistoriqueDetaille> historiqueEntries;
 
+<<<<<<< HEAD
   const EmptyJustificatifsScreen({
     super.key,
     this.navIndex = 0,
     this.onNavTap,
     this.historiqueEntries = const [],
   });
+=======
+  const EmptyJustificatifsScreen({super.key, this.navIndex = 0, this.onNavTap});
+>>>>>>> origin/develop
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AppNavBarNoReturn(title: "Justificatifs d'absence"),
+      appBar: AppNavBarNoReturn(title: "Justificatifs d'absence", onNotificationPressed: () {  },),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),

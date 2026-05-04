@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/screens/annonces/annonces_screen.dart';
 
 class AnnouncementsSection extends StatelessWidget {
-  const AnnouncementsSection({super.key});
+  // ✅ On ajoute la fonction de navigation en paramètre
+  final ValueChanged<int> onNavTap;
+
+  const AnnouncementsSection({
+    super.key, 
+    required this.onNavTap, // Requis pour changer d'onglet
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,31 +17,42 @@ class AnnouncementsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. En-tête avec Icône et Titre
           Row(
             children: [
-              const Icon(Icons.campaign_outlined, color: Colors.orange, size: 24),
+              const Icon(Icons.campaign_outlined, color: Color(0xFFF06424), size: 24),
               const SizedBox(width: 8),
               const Text(
                 'Annonces',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 18, 
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF052A36),
+                ),
               ),
               const Spacer(),
-              // Le bouton pour aller vers ETU-11
+              
               TextButton(
                 onPressed: () {
+<<<<<<< HEAD
                   Navigator.push(context, MaterialPageRoute(
                     builder: (_) => const AnnonceScreen(),
                   ));
                 },
                 child: const Text('Voir tout', style: TextStyle(color: Colors.orange)),
+=======
+                  onNavTap(5);
+                },
+                child: const Text(
+                  'Voir tout', 
+                  style: TextStyle(color: Color(0xFFF06424), fontWeight: FontWeight.bold),
+                ),
+>>>>>>> origin/develop
               ),
             ],
           ),
 
           const SizedBox(height: 10),
 
-          // 2. Les 2 dernières annonces
           _buildAnnouncementItem(
             title: "Ouverture des inscriptions au forum carrière",
             time: "Aujourd'hui, 08h30",
@@ -56,25 +73,27 @@ class AnnouncementsSection extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Le point indicateur
         Container(
           margin: const EdgeInsets.only(top: 6),
           height: 8,
           width: 8,
           decoration: BoxDecoration(
-            color: isNew ? Colors.orange : Colors.grey[400],
+            color: isNew ? const Color(0xFFF06424) : Colors.grey[400],
             shape: BoxShape.circle,
           ),
         ),
         const SizedBox(width: 15),
-        // Le texte
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500, 
+                  fontSize: 14,
+                  color: Color(0xFF052A36),
+                ),
               ),
               const SizedBox(height: 4),
               Text(

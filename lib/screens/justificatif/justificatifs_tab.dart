@@ -15,6 +15,7 @@ class JustificatifsTab extends StatefulWidget {
     super.key,
     required this.navIndex,
     required this.onNavTap,
+<<<<<<< HEAD
   });
 
   @override
@@ -117,6 +118,9 @@ class _LoadingJustificatifsScreen extends StatelessWidget {
   const _LoadingJustificatifsScreen({
     required this.navIndex,
     required this.onNavTap,
+=======
+    this.pendingAbsences = const [mockAbsenceEnAttente],
+>>>>>>> origin/develop
   });
 
   @override

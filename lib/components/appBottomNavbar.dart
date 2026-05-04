@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/components/appTheme.dart';
 
-
 class AppBottomNavBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int>? onTap;
 
-  const AppBottomNavBar({
-    super.key,
-    required this.currentIndex,
-    this.onTap,
-  });
+  const AppBottomNavBar({super.key, required this.currentIndex, this.onTap});
 
   static const _icons = [
     Icons.home_rounded,            // 0 Accueil
@@ -20,7 +15,8 @@ class AppBottomNavBar extends StatelessWidget {
     Icons.menu_book_rounded,       // 4 Mes Matières
     Icons.assignment_rounded,      // 5 Devoirs
     Icons.folder_open_rounded,     // 6 Ressources
-    Icons.person_rounded,          // 7 Profil
+    Icons.campaign_rounded,        // 7 Annonces
+    Icons.person_rounded,          // 8 Profil
   ];
 
   @override
