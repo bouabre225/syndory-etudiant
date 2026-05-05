@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-// pour afficher les dates en francais (ex : "3 mai" au lieu de "3 May")
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart';
-import 'package:syndory_etudiant/components/appTheme.dart';
-import 'package:syndory_etudiant/config/app_config.dart';
+import 'package:syndory_etudiant/components/apptheme.dart';
 import 'package:syndory_etudiant/screens/attendance/attendanceScreen.dart';
 import 'package:syndory_etudiant/screens/attendance/emptyAttendanceScreen.dart';
-import 'package:syndory_etudiant/screens/auth/login_screen.dart';
 import 'package:syndory_etudiant/screens/dashboard/dashboard_page.dart';
 import 'package:syndory_etudiant/screens/calendar/calendar_page.dart';
 import 'package:syndory_etudiant/screens/devoir/devoirs_screen.dart';
 import 'package:syndory_etudiant/screens/justificatif/justificatifs_tab.dart';
 import 'package:syndory_etudiant/screens/matieres/matieres_screen.dart';
-import 'package:syndory_etudiant/screens/profile/profile_screen.dart';
 import 'package:syndory_etudiant/screens/resources/resources_page.dart';
 import 'package:syndory_etudiant/screens/profil/profile_page.dart';
 import 'package:syndory_etudiant/profile/controllers/profile_controller.dart';
 import 'package:syndory_etudiant/screens/announcements/announcements_screen.dart';
+import 'package:syndory_etudiant/screens/auth/login_screen.dart';
+import 'package:syndory_etudiant/services/auth_service.dart';
+import 'package:syndory_etudiant/providers/devoir_provider.dart';
+import 'package:syndory_etudiant/screens/profile/profile_screen.dart';
+import 'package:syndory_etudiant/config/app_config.dart';
 
-// main() est async pour initialiser la locale française avant le demarrage
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // charge les donnees de localisation pour afficher les dates en francais
   await initializeDateFormatting('fr_FR', null);
 
   // initialisation de Supabase
@@ -33,12 +31,7 @@ void main() async {
     anonKey: AppConfig.supabaseAnonKey,
   );
 
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ProfileController(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -47,18 +40,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ProfileController())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProfileController()),
+        ChangeNotifierProvider(create: (_) => DevoirProvider()),
+        ChangeNotifierProvider.value(value: AuthService.instance),
+      ],
       child: MaterialApp(
         title: 'Syndory Étudiant',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        initialRoute: '/',
-        routes: {
-          '/': (_) => const LoginScreen(),
-          '/home': (_) => const AppShell(),
-        },
+        home: const AppRouter(),
       ),
     );
+  }
+}
+
+class AppRouter extends StatelessWidget {
+  const AppRouter({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final auth = context.watch<AuthService>();
+
+    if (!auth.isAuthenticated) {
+      return LoginScreen(
+        onLoginSuccess: () {},
+      );
+    }
+
+    return const AppShell();
   }
 }
 
@@ -96,7 +106,6 @@ class _AppShellState extends State<AppShell> {
   }
 }
 
-/// Onglet Assiduité : bascule entre écran vide et écran rempli.
 class AttendanceTab extends StatefulWidget {
   final int navIndex;
   final ValueChanged<int> onNavTap;

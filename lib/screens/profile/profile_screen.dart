@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart';
-import 'package:syndory_etudiant/components/appTheme.dart';
+import 'package:syndory_etudiant/components/apptheme.dart';
 import 'package:syndory_etudiant/mocks/dashboardMockData.dart';
 
 // page profil de l'etudiant connecte
@@ -50,11 +50,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
-  // charge le profil depuis Supabase
+  // load profile data from Supabase
+  // if user is not authenticated, stop loading immediately
   Future<void> _loadProfile() async {
     try {
       final userId = _supabase.auth.currentUser?.id;
-      if (userId == null) return;
+      if (userId == null) {
+        // no user logged in, stop the spinner
+        setState(() => _isLoading = false);
+        return;
+      }
 
       final data = await _supabase
           .from('users')
@@ -69,6 +74,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _isLoading = false;
       });
     } catch (e) {
+      // on error, stop the spinner so the screen is not stuck
+      debugPrint('Error loading profile: $e');
       if (!mounted) return;
       setState(() => _isLoading = false);
     }
@@ -518,10 +525,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () async {
               Navigator.pop(ctx);
               // deconnexion via Supabase Auth
+              // AppRouter detecte automatiquement et redirige vers le login
               await _supabase.auth.signOut();
-              if (!mounted) return;
-              // on revient a la page de login et on efface tout l'historique de navigation
-              Navigator.of(context).pushNamedAndRemoveUntil('/', (_) => false);
             },
             child: const Text('Deconnecter', style: TextStyle(color: AppColors.danger, fontWeight: FontWeight.w600)),
           ),
