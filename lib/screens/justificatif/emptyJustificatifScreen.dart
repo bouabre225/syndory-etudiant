@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart';
 import 'package:syndory_etudiant/components/appNavbarNoReturn.dart';
-import 'package:syndory_etudiant/components/appTheme.dart';
+import 'package:syndory_etudiant/components/apptheme.dart';
 import 'package:syndory_etudiant/components/justificatif/historiqueDetail.dart';
 import 'package:syndory_etudiant/models/justificatifModels.dart';
 
 class EmptyJustificatifsScreen extends StatelessWidget {
   final int navIndex;
   final ValueChanged<int>? onNavTap;
+  final List<JustificatifHistoriqueDetaille> historiqueEntries;
 
-  const EmptyJustificatifsScreen({super.key, this.navIndex = 0, this.onNavTap});
+  const EmptyJustificatifsScreen({
+    super.key,
+    this.navIndex = 0,
+    this.onNavTap,
+    this.historiqueEntries = const [],
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AppNavBarNoReturn(title: "Justificatifs d'absence", onNotificationPressed: () {  },),
+      appBar: AppNavBarNoReturn(
+        title: "Justificatifs d'absence",
+        onNotificationPressed: () {},
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -91,9 +100,7 @@ class EmptyJustificatifsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
-              ...mockHistoriqueDetaille.map(
-                (e) => HistoriqueDetailCard(entry: e),
-              ),
+              ...historiqueEntries.map((e) => HistoriqueDetailCard(entry: e)),
 
               const SizedBox(height: 24),
             ],

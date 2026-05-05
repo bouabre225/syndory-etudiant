@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syndory_etudiant/screens/matieres/matiere_detail_screen.dart';
 import 'matiere_card.dart';
-import 'package:syndory_etudiant/screens/matieres/matiere_detail_screen.dart';
 
 /// Corps principal de l'écran "Mes Matières".
 /// Contient une barre de recherche, des onglets Semestre 1/2/3,
@@ -142,10 +141,12 @@ class MatieresBody extends StatelessWidget {
                     final m = matieresFiltrees[index];
                     return GestureDetector(
                       onTap: () {
-                        // on ouvre le detail de la matiere
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (_) => MatiereDetailScreen(matiere: m),
-                        ));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MatiereDetailScreen(matiere: m),
+                          ),
+                        );
                       },
                       child: MatiereCard(
                         nom: m['nom'] as String,
