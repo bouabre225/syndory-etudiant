@@ -13,10 +13,8 @@ class AppBottomNavBar extends StatelessWidget {
     Icons.person_off_rounded,      // 2 Absences / Justificatifs
     Icons.fact_check_rounded,      // 3 Assiduité
     Icons.menu_book_rounded,       // 4 Mes Matières
-    Icons.assignment_rounded,      // 5 Devoirs
     Icons.folder_open_rounded,     // 6 Ressources
     Icons.campaign_rounded,        // 7 Annonces
-    Icons.person_rounded,          // 8 Profil
   ];
 
   @override

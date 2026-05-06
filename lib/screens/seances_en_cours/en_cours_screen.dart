@@ -168,7 +168,6 @@ class _EnCoursScreenState extends State<EnCoursScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const AppBottomNavBar(currentIndex: 2),
     );
   }
 
@@ -639,4 +638,4 @@ class _EnCoursScreenState extends State<EnCoursScreen> {
       ],
     );
   }
-}
+}

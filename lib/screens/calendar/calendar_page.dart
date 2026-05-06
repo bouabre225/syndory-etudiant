@@ -101,7 +101,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AppNavBarNoReturn(title: "Calendrier", onNotificationPressed: () {  },),
+      appBar: AppNavBarNoReturn(title: "Calendrier"),
       body: _isLoading
           ? const CalendarLoadingSkeleton()
           : Column(

@@ -32,15 +32,7 @@ class _MatieresScreenState extends State<MatieresScreen> {
       
       // CORRECTION : Utilisation de AppNavBarNoReturn avec action notification
       appBar: AppNavBarNoReturn(
-        title: 'Mes matières',
-        onNotificationPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const NotificationsScreen(),
-            ),
-          );
-        },
+        title: 'Mes matières'
       ),
       
       body: MatieresBody(

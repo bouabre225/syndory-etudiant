@@ -59,7 +59,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AppNavBarNoReturn(title: "Annonce", onNotificationPressed: () {  },),
+      appBar: AppNavBarNoReturn(title: "Annonce"),
       bottomNavigationBar: AppBottomNavBar(
         currentIndex: widget.navIndex,
         onTap: widget.onNavTap,

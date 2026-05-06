@@ -8,7 +8,7 @@ class AppNavBarNoReturn extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final String? avatarUrl;
 
-  const AppNavBarNoReturn({super.key, required this.title, this.avatarUrl, required Null Function() onNotificationPressed});
+  const AppNavBarNoReturn({super.key, required this.title, this.avatarUrl});
 
   @override
   Size get preferredSize => const Size.fromHeight(56);

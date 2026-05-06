@@ -158,8 +158,7 @@ class _LoadingJustificatifsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
       appBar: AppNavBarNoReturn(
-        title: "Justificatifs d'absence",
-        onNotificationPressed: () {},
+        title: "Justificatifs d'absence"
       ),
       body: const Center(
         child: CircularProgressIndicator(color: AppColors.primary),
@@ -188,8 +187,7 @@ class _ErrorJustificatifsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
       appBar: AppNavBarNoReturn(
-        title: "Justificatifs d'absence",
-        onNotificationPressed: () {},
+        title: "Justificatifs d'absence"
       ),
       body: Center(
         child: Padding(

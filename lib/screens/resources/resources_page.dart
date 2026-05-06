@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syndory_etudiant/components/appBottomNavbar.dart';
+import 'package:syndory_etudiant/components/appNavbarNoReturn.dart';
 import 'package:syndory_etudiant/components/apptheme.dart';
 import 'resources_data.dart';
 import 'resources_widgets.dart';
@@ -140,7 +141,9 @@ class _ResourcesPageState extends State<ResourcesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: _buildAppBar(),
+      appBar: AppNavBarNoReturn(
+        title: "Ressources",
+      ),
       body: _isLoading
           ? const ResourcesLoadingSkeleton()
           : Column(

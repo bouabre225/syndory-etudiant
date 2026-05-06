@@ -36,15 +36,6 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
       // CONFIGURATION DE LA NAVBAR ICI
       appBar: AppNavBarNoReturn(
         title: 'Assiduité',
-        onNotificationPressed: () {
-          print("Tentative de navigation vers Notifications");
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const NotificationsScreen(),
-            ),
-          );
-        },
       ),
       body: SafeArea(
         child: AnimatedSwitcher(

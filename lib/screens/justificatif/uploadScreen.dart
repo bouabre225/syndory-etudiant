@@ -143,8 +143,7 @@ class _JustificatifsUploadScreenState extends State<JustificatifsUploadScreen> {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
       appBar: AppNavBarNoReturn(
-        title: "Justificatifs d'absence",
-        onNotificationPressed: () {},
+        title: "Justificatifs d'absence"
       ),
       body: SafeArea(
         child: SingleChildScrollView(
